@@ -17,8 +17,7 @@ public class Main {
 		
 		Page page=new Page(list,length);
 		
-		while(page.getLength()<200)
-		{
+
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader("123.txt"));
 				//reader.readLine();
@@ -47,10 +46,16 @@ public class Main {
 						field[2].getContentString()+','+field[3].getContentString()+','+field[4].getContentString()+','+
 						field[5].getContentString()+','+field[6].getContentDouble()+','+field[7].getContentString()+','+
 						field[8].getContentDouble(),count-1);
+				length+=record.getLength();
+				page.setLength(length);
+				if (page.getLength()>600)
+					break;
 				list.add(record.getContent());
 				page.setContent(list);
-				length+=record.getLength();
-	/*			if(count<202)
+
+				
+
+	/*			if(count<202)s
 				{
 					for(int i=0;i<9;i++)
 					{
@@ -68,8 +73,10 @@ public class Main {
 				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
+		for(int i=0;i<page.getContent().size();i++)
+		{
+		System.out.println(page.getContent().get(i));
 		}
-		System.out.println(page.getLength());
 	}
 	
 }
