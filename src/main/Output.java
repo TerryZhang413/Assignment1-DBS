@@ -46,26 +46,16 @@ public class Output {
 					}
 					os.writeDouble(pageList.get(pageListLocation).getRecordList().get(recordListLocation).getFieldList().get(8).getContentDouble());
 				}
+				for(int blankArea=0;blankArea<pageList.get(pageListLocation).getRest_length();blankArea++)
+				{
+					os.writeBytes(" ");
+				}
 			}
 		} catch (Exception e) {
 			// TODO 自动生成的 catch 块
 			e.printStackTrace();
 		}
 		
-/*		System.out.println("page size:"+pageList.size());
-		
-		for(int i=0;i<pageList.size();i++)
-		{
-			System.out.println("Page "+i+":   "+"Record length:"+pageList.get(i).getRecordList().get(0).getLength());
-			for(int j=0;j<pageList.get(i).getRecordList().size();j++)
-			{
-				System.out.println("Record "+j+":");
-				for(int h=0;h<8;h++)
-				{
-					System.out.print(pageList.get(i).getRecordList().get(j).getFieldList().get(h).getContentString()+" ");
-				}
-				System.out.println(pageList.get(i).getRecordList().get(j).getFieldList().get(8).getContentDouble());
-			}
-		} */
+/*		 */
 	}
 }

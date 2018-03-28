@@ -54,7 +54,7 @@ public class dbload {
 						page=new Page(pageSize); 
 						page.addRecord(record);
 					}
-					if (pageList.size()>5)
+					if (pageList.size()>50)
 						break;
 				}
 			} catch (Exception e) {
@@ -65,6 +65,22 @@ public class dbload {
 
 			Output output=new Output(pageList);
 			output.output();
+			
+			System.out.println("page size:"+pageList.size());
+			
+			for(int i=0;i<pageList.size();i++)
+			{
+				System.out.println("Page "+i+":   "+"First record length:"+pageList.get(i).getRecordList().get(0).getLength());
+				for(int j=0;j<pageList.get(i).getRecordList().size();j++)
+				{
+					System.out.println("Record "+j+":");
+					for(int h=0;h<8;h++)
+					{
+						System.out.print(pageList.get(i).getRecordList().get(j).getFieldList().get(h).getContentString()+" ");
+					}
+					System.out.println(pageList.get(i).getRecordList().get(j).getFieldList().get(8).getContentDouble());
+				}
+			}
 			//System.out.println(pageList.get(0).getRecordList().get(0).getFieldList().get(0).getAttribute());
 
 	}
