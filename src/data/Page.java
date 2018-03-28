@@ -5,18 +5,25 @@ import java.util.ArrayList;
 public class Page {
 
 	private ArrayList<Record> recordList;
-	private int length=4;
+	private int length;
 	private int max_length;
 	private int rest_length;
 	
 	public Page(int max_length)
 	{
 		this.max_length=max_length;
-		this.rest_length=max_length;
+		this.length=4;
+		this.rest_length=max_length-this.length;
 		recordList=new ArrayList<Record>();
 	}
 
 
+	public void addRecord(Record record)
+	{
+		this.recordList.add(record);
+		this.length+=record.getLength();
+		this.rest_length-=record.getLength();
+	}
 
 	public int getLength() {
 		return length;
@@ -39,12 +46,7 @@ public class Page {
 	}
 
 
-	public void addRecord(Record record)
-	{
-		this.recordList.add(record);
-		this.length+=record.getLength()+2;
-		this.rest_length-=record.getLength();
-	}
+
 
 
 

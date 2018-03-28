@@ -13,8 +13,8 @@ public class dbload {
 	public static void main(String[] args) {
 		
 
-		int pageSize=Integer.valueOf(args[1]);
-		String fileAddress=args[2];
+		int pageSize=Integer.valueOf(args[1]); //page size
+		String fileAddress=args[2];	          //file address
 		
 		Page page=new Page(pageSize);
 		ArrayList<Page> pageList= new ArrayList<Page>();
@@ -26,9 +26,8 @@ public class dbload {
 				
 			while((line = reader.readLine())!=null)
 				{ 
-			      	String item[] = line.split("\t");//CSV格式文件为逗号分隔符文件，这里根据逗号切分 
-			        //System.out.println(item.length);
-					if (item.length<9)
+			      	String item[] = line.split("\t");//split the csv file by tab
+					if (item.length<9) //if columns is not 9,delete this useless line 
 						{continue;}
 					ArrayList<Field> field = new ArrayList<Field>();
 					field.add(new Field(item[0],"String",item[0].getBytes("utf-8").length));
@@ -39,29 +38,28 @@ public class dbload {
 					field.add(new Field(item[5],"String",item[5].getBytes("utf-8").length));
 					field.add(new Field(item[6],"String",item[6].getBytes("utf-8").length));
 					field.add(new Field(item[7],"String",item[7].getBytes("utf-8").length));
-					field.add(new Field(Double.valueOf(item[8]),"Double",item[8].getBytes("utf-8").length));	
+					field.add(new Field(Double.valueOf(item[8]),"Double",8));	//input data into fields
 	
 					Record record=new Record(field);
 					
-					
-					if(page.getRest_length()>=(record.getLength()+2))
+					// if there is enough space to store next record
+					if(page.getRest_length()>=(record.getLength()+2)) 
 					{
-						page.addRecord(record);
+						page.addRecord(record); //add a new record to page
 					}
-					else
+					else // if not 
 					{
-						pageList.add(page);
-						page=new Page(pageSize); 
-						page.addRecord(record);
+						pageList.add(page);  //push this page to page list
+						page=new Page(pageSize); //create a new page
+						page.addRecord(record);  //store the last record in the new page
 					}
-					if (pageList.size()>50)
+					if (pageList.size()>0)
 						break;
 				}
 			} catch (Exception e) {
-				// TODO 自动生成的 catch 块
 				e.printStackTrace();
 			}
-			pageList.add(page);
+			//pageList.add(page);
 
 			Output output=new Output(pageList);
 			output.output();
@@ -81,8 +79,6 @@ public class dbload {
 					System.out.println(pageList.get(i).getRecordList().get(j).getFieldList().get(8).getContentDouble());
 				}
 			}
-			//System.out.println(pageList.get(0).getRecordList().get(0).getFieldList().get(0).getAttribute());
-
 	}
 	
 }

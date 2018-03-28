@@ -15,6 +15,7 @@ public class Record {
 		{
 			this.length+=fieldList.get(i).getLength();
 		}
+		this.length+=2;
 	}
 
 
