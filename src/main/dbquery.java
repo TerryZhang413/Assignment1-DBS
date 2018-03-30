@@ -11,9 +11,13 @@ import java.util.ArrayList;
 import data.Record;
 
 public class dbquery {
-
+	
+	
+	
 	public static void main(String[] args) {
 		
+		long startTime=System.currentTimeMillis();
+		long endTime;
 		String queryKeyWord=args[0];  //get the key words
 		int pageSize=Integer.valueOf(args[1]); //get the pagesize in order to direct at the target heap file
 		System.out.println("Key words searched is: "+queryKeyWord);
@@ -50,9 +54,12 @@ public class dbquery {
 			else
 				break;
 		}
-		System.out.println("All pages have been viewed!");
+		System.out.println("All pages and records have been viewed!");
 		if(judgement==0)
 		System.out.println("There is no record matched!");
+		
+		endTime=System.currentTimeMillis();
+		System.out.println("Number of milliseconds is: "+ (endTime-startTime)+ "ms");
 	}
 	
 	//get size of page
