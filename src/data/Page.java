@@ -12,8 +12,8 @@ public class Page {
 	public Page(int max_length)
 	{
 		this.max_length=max_length;
-		this.length=4;
-		this.rest_length=max_length-this.length;
+		this.length=4; //this space is to store amount of records
+		this.rest_length=max_length-this.length;  //initial the rest space of the page
 		recordList=new ArrayList<Record>();
 	}
 
@@ -21,8 +21,8 @@ public class Page {
 	public void addRecord(Record record)
 	{
 		this.recordList.add(record);
-		this.length+=record.getLength();
-		this.rest_length-=record.getLength();
+		this.length+=record.getLength()+2;  // 2 represent the space of index for the record
+		this.rest_length-=record.getLength()+2; //compute the rest space of the page
 	}
 
 	public int getLength() {

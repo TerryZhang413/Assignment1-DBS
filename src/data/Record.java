@@ -10,12 +10,11 @@ public class Record {
 	public Record(ArrayList<Field> fieldList)
 	{                           
 		this.fieldList=fieldList;
-		this.length=18;
+		this.length=18; //this space is for index
 		for(int i=0;i<fieldList.size();i++)
 		{
-			this.length+=fieldList.get(i).getLength();
+			this.length+=fieldList.get(i).getLength();  //add length of every field
 		}
-		this.length+=2;
 	}
 
 
